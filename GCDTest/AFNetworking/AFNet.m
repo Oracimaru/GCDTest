@@ -75,8 +75,12 @@
     urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL * url = [NSURL URLWithString: urlStr];
     
-    NSURLSessionDataTask * dataTask = [session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                       {
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLSessionDataTask * dataTask=[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+    //}];
+//    NSURLSessionDataTask * dataTask = [session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                       //{
                                            if(success){
                                                if (data) {
                                                    NSDictionary* json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -97,7 +101,15 @@
     
     
 }
-
++ (NSString*)getJsonWithURL:(NSString*)urlStr
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:testUrl]];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return responseString;
+}
 @end
 
 /**

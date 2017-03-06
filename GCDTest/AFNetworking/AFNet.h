@@ -33,6 +33,8 @@
 
 + (void)getJsonWithURL:(NSString *)urlStr success:(void (^)(id JSON))success failure:(void (^)(NSError *error))failure;
 
++ (NSString*)getJsonWithURL:(NSString*)urlStr;
+
 @end
 
 

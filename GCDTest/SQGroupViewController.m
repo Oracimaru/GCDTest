@@ -6,13 +6,13 @@
 //  Copyright © 2017年 zhanghaibin. All rights reserved.
 //
 
-#import "SQItemOneViewController.h"
+#import "SQGroupViewController.h"
 
-@interface SQItemOneViewController ()
+@interface SQGroupViewController ()
 
 @end
 
-@implementation SQItemOneViewController
+@implementation SQGroupViewController
 
 #pragma mark viewDidLoad
 - (void)viewDidLoad {
@@ -24,6 +24,7 @@
     [self initUI];
     
     [self dispatch_group_async];
+    [self dispatch_apply];
 }
 
 #pragma mark - 系统代理
@@ -48,7 +49,6 @@
     /**
      dispatch_group_async可以实现监听一组任务是否完成，完成后得到通知执行其他的操作。这个方法很有用，比如你执行三个下载任务，当三个任务都下载完成后你才通知界面说完成的了。下面是一段例子代码
      */
-    
     //1. 获取一个全局队列
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
@@ -61,11 +61,13 @@
         NSLog(@"group1");
         
         // 你的网络请求代码
-        [AFNet getJsonWithURL:testUrl  success:^(id JSON) {
-            NSLog(@"group1 block回调");
-        } failure:^(NSError *error) {
-            
-        }];
+//        [AFNet getJsonWithURL:testUrl  success:^(id JSON) {
+//            NSLog(@"group1 block回调");
+//        } failure:^(NSError *error) {
+//            
+//        }];
+       NSString*responseString  =  [AFNet getJsonWithURL:nil];
+        NSLog(@"grou1  ---%@",responseString);
     });
     
     // 在group队列组中队列
@@ -74,12 +76,8 @@
         NSLog(@"group2");
         
         // 你的网络请求代码
-        [AFNet getJsonWithURL:testUrl success:^(id JSON) {
-            NSLog(@"group2 block回调");
-  
-        } failure:^(NSError *error) {
-            
-        }];
+        NSString*responseString  =  [AFNet getJsonWithURL:nil];
+        NSLog(@"grou2  ---%@",responseString);
     });
     
     // 在group队列组中队列
@@ -88,25 +86,45 @@
         NSLog(@"group3");
         
         // 你的网络请求代码
-        [AFNet getJsonWithURL:@""  success:^(id JSON) {
-            NSLog(@"group3 block回调");
-        } failure:^(NSError *error) {
-            NSLog(@"group3 block失败回调");
-
-        }];
-
+        NSString*responseString  =  [AFNet getJsonWithURL:nil];
+        NSLog(@"grou3  ---%@",responseString);
     });
     
-    
+    NSLog(@"1,2,3请求未完成");
+    //dispatch_group_wait用于阻塞等待所有group完成,测试会卡界面
+   // dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    NSLog(@"wait--1,2,3请求完成回调");
+
     // 回到主队列中,刷新UI
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         
         NSLog(@"1,2,3请求完成回调");
     });
     
-    /** 非ARC下销毁group对象
-     dispatch_release(group);
-     */
 }
-
+//10s后在后台线程同步执行请求3次.
+- (void)dispatch_apply
+{
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, queue, ^{
+        
+        dispatch_async(queue, ^{
+            
+            dispatch_apply(3, queue, ^(size_t index) {
+                
+                NSString* responseString = [AFNet getJsonWithURL:nil];
+                
+                NSLog(@"apply  ---%@", responseString);
+                
+                NSLog(@"%@", dispatch_get_current_queue());
+            });
+            NSLog(@"apply--1,2,3请求完成回调");
+        });
+        NSLog(@"不用等1,2,3完成回调");
+    });
+}
 @end

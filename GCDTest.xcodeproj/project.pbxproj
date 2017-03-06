@@ -15,7 +15,7 @@
 		65760F431E63F80300E98511 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65760F411E63F80300E98511 /* LaunchScreen.storyboard */; };
 		65760F4E1E63F80300E98511 /* GCDTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760F4D1E63F80300E98511 /* GCDTestTests.m */; };
 		65760F591E63F80300E98511 /* GCDTestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760F581E63F80300E98511 /* GCDTestUITests.m */; };
-		65760F681E63F89400E98511 /* SQItemOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760F671E63F89400E98511 /* SQItemOneViewController.m */; };
+		65760F681E63F89400E98511 /* SQGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760F671E63F89400E98511 /* SQGroupViewController.m */; };
 		65760F841E63F93A00E98511 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65760F6A1E63F93A00E98511 /* Info.plist */; };
 		65760F851E63F93A00E98511 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760F6C1E63F93A00E98511 /* MASCompositeConstraint.m */; };
 		65760F861E63F93A00E98511 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760F6F1E63F93A00E98511 /* MASConstraint.m */; };
@@ -38,8 +38,9 @@
 		65760FB41E63FEF100E98511 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760FA61E63FEF100E98511 /* AFURLResponseSerialization.m */; };
 		65760FB51E63FEF100E98511 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760FA81E63FEF100E98511 /* AFURLSessionManager.m */; };
 		65760FB61E63FEF100E98511 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760FAA1E63FEF100E98511 /* UIImageView+AFNetworking.m */; };
-		65760FB91E64117800E98511 /* SQItemTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760FB81E64117800E98511 /* SQItemTwoViewController.m */; };
-		65760FBC1E64296700E98511 /* SQItemThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760FBB1E64296700E98511 /* SQItemThreeViewController.m */; };
+		65760FB91E64117800E98511 /* SQBarrierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760FB81E64117800E98511 /* SQBarrierViewController.m */; };
+		65760FBC1E64296700E98511 /* SQSemaphoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65760FBB1E64296700E98511 /* SQSemaphoreViewController.m */; };
+		65F687861E6D31A0005A2308 /* SQSyncViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F687851E6D31A0005A2308 /* SQSyncViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,8 +77,8 @@
 		65760F541E63F80300E98511 /* GCDTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65760F581E63F80300E98511 /* GCDTestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDTestUITests.m; sourceTree = "<group>"; };
 		65760F5A1E63F80300E98511 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		65760F661E63F89400E98511 /* SQItemOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQItemOneViewController.h; sourceTree = "<group>"; };
-		65760F671E63F89400E98511 /* SQItemOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQItemOneViewController.m; sourceTree = "<group>"; };
+		65760F661E63F89400E98511 /* SQGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQGroupViewController.h; sourceTree = "<group>"; };
+		65760F671E63F89400E98511 /* SQGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQGroupViewController.m; sourceTree = "<group>"; };
 		65760F6A1E63F93A00E98511 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65760F6B1E63F93A00E98511 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		65760F6C1E63F93A00E98511 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
@@ -128,10 +129,12 @@
 		65760FA81E63FEF100E98511 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		65760FA91E63FEF100E98511 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		65760FAA1E63FEF100E98511 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		65760FB71E64117800E98511 /* SQItemTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQItemTwoViewController.h; sourceTree = "<group>"; };
-		65760FB81E64117800E98511 /* SQItemTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQItemTwoViewController.m; sourceTree = "<group>"; };
-		65760FBA1E64296700E98511 /* SQItemThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQItemThreeViewController.h; sourceTree = "<group>"; };
-		65760FBB1E64296700E98511 /* SQItemThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQItemThreeViewController.m; sourceTree = "<group>"; };
+		65760FB71E64117800E98511 /* SQBarrierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQBarrierViewController.h; sourceTree = "<group>"; };
+		65760FB81E64117800E98511 /* SQBarrierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQBarrierViewController.m; sourceTree = "<group>"; };
+		65760FBA1E64296700E98511 /* SQSemaphoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSemaphoreViewController.h; sourceTree = "<group>"; };
+		65760FBB1E64296700E98511 /* SQSemaphoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSemaphoreViewController.m; sourceTree = "<group>"; };
+		65F687841E6D31A0005A2308 /* SQSyncViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQSyncViewController.h; sourceTree = "<group>"; };
+		65F687851E6D31A0005A2308 /* SQSyncViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQSyncViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,12 +189,14 @@
 				65760F371E63F80300E98511 /* AppDelegate.m */,
 				65760F391E63F80300E98511 /* ViewController.h */,
 				65760F3A1E63F80300E98511 /* ViewController.m */,
-				65760F661E63F89400E98511 /* SQItemOneViewController.h */,
-				65760F671E63F89400E98511 /* SQItemOneViewController.m */,
-				65760FB71E64117800E98511 /* SQItemTwoViewController.h */,
-				65760FB81E64117800E98511 /* SQItemTwoViewController.m */,
-				65760FBA1E64296700E98511 /* SQItemThreeViewController.h */,
-				65760FBB1E64296700E98511 /* SQItemThreeViewController.m */,
+				65760F661E63F89400E98511 /* SQGroupViewController.h */,
+				65760F671E63F89400E98511 /* SQGroupViewController.m */,
+				65760FB71E64117800E98511 /* SQBarrierViewController.h */,
+				65760FB81E64117800E98511 /* SQBarrierViewController.m */,
+				65760FBA1E64296700E98511 /* SQSemaphoreViewController.h */,
+				65760FBB1E64296700E98511 /* SQSemaphoreViewController.m */,
+				65F687841E6D31A0005A2308 /* SQSyncViewController.h */,
+				65F687851E6D31A0005A2308 /* SQSyncViewController.m */,
 				65760F3C1E63F80300E98511 /* Main.storyboard */,
 				65760F3F1E63F80300E98511 /* Assets.xcassets */,
 				65760F411E63F80300E98511 /* LaunchScreen.storyboard */,
@@ -204,6 +209,7 @@
 		65760F331E63F80300E98511 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				65760F901E63FCE900E98511 /* PrefixHeader.pch */,
 				65760F911E63FEF100E98511 /* AFNetworking */,
 				65760F691E63F93A00E98511 /* Masonry */,
 				65760F341E63F80300E98511 /* main.m */,
@@ -232,7 +238,6 @@
 		65760F691E63F93A00E98511 /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
-				65760F901E63FCE900E98511 /* PrefixHeader.pch */,
 				65760F6A1E63F93A00E98511 /* Info.plist */,
 				65760F6B1E63F93A00E98511 /* MASCompositeConstraint.h */,
 				65760F6C1E63F93A00E98511 /* MASCompositeConstraint.m */,
@@ -361,7 +366,7 @@
 				TargetAttributes = {
 					65760F2F1E63F80300E98511 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 549RC4M8UT;
+						DevelopmentTeam = 499JTTNTTD;
 					};
 					65760F481E63F80300E98511 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -429,10 +434,11 @@
 				65760FB51E63FEF100E98511 /* AFURLSessionManager.m in Sources */,
 				65760FB61E63FEF100E98511 /* UIImageView+AFNetworking.m in Sources */,
 				65760FB21E63FEF100E98511 /* AFURLConnectionOperation.m in Sources */,
-				65760FBC1E64296700E98511 /* SQItemThreeViewController.m in Sources */,
+				65760FBC1E64296700E98511 /* SQSemaphoreViewController.m in Sources */,
 				65760F871E63F93A00E98511 /* MASConstraintMaker.m in Sources */,
+				65F687861E6D31A0005A2308 /* SQSyncViewController.m in Sources */,
 				65760FB01E63FEF100E98511 /* AFNetworkReachabilityManager.m in Sources */,
-				65760F681E63F89400E98511 /* SQItemOneViewController.m in Sources */,
+				65760F681E63F89400E98511 /* SQGroupViewController.m in Sources */,
 				65760F3B1E63F80300E98511 /* ViewController.m in Sources */,
 				65760F861E63F93A00E98511 /* MASConstraint.m in Sources */,
 				65760F8E1E63F93A00E98511 /* ViewController+MASAdditions.m in Sources */,
@@ -441,7 +447,7 @@
 				65760FAC1E63FEF100E98511 /* AFHTTPRequestOperationManager.m in Sources */,
 				65760F8B1E63F93A00E98511 /* NSArray+MASAdditions.m in Sources */,
 				65760F8A1E63F93A00E98511 /* MASViewConstraint.m in Sources */,
-				65760FB91E64117800E98511 /* SQItemTwoViewController.m in Sources */,
+				65760FB91E64117800E98511 /* SQBarrierViewController.m in Sources */,
 				65760F891E63F93A00E98511 /* MASViewAttribute.m in Sources */,
 				65760F8D1E63F93A00E98511 /* View+MASAdditions.m in Sources */,
 				65760F381E63F80300E98511 /* AppDelegate.m in Sources */,
@@ -594,6 +600,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 499JTTNTTD;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GCDTest/PrefixHeader.pch;
 				INFOPLIST_FILE = GCDTest/Info.plist;
@@ -608,6 +615,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 499JTTNTTD;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GCDTest/PrefixHeader.pch;
 				INFOPLIST_FILE = GCDTest/Info.plist;

@@ -1,5 +1,5 @@
 //
-//  SQitemOneViewController.h
+//  SQItemTwoViewController.h
 //  GCDTest
 //
 //  Created by zhanghaibin on 17/2/27.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SQItemOneViewController : UIViewController
+@interface SQBarrierViewController : UIViewController
 
 @end

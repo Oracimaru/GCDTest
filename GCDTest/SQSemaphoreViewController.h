@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SQItemThreeViewController : UIViewController
+@interface SQSemaphoreViewController : UIViewController
 
 @end

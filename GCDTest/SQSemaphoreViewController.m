@@ -6,9 +6,9 @@
 //  Copyright © 2017年 zhanghaibin. All rights reserved.
 //
 
-#import "SQItemThreeViewController.h"
+#import "SQSemaphoreViewController.h"
 
-@interface SQItemThreeViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface SQSemaphoreViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
 }
 @property (nonatomic, strong) UITableView * tableView;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation SQItemThreeViewController
+@implementation SQSemaphoreViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,27 +67,37 @@
     
     return cell;
 }
+/*
+ 如果当前执行的线程是主线程，以上代码就会出现死锁。
+ 因为dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)阻塞了当前线程，而且等待时间是DISPATCH_TIME_FOREVER——永远等待，这样它就永远的阻塞了当前线程
+ */
 - (void)loadImage:(UIImageView*)imageView row:(NSInteger)row
 {
-    //     semaphore = dispatch_semaphore_create(2);
-    //    [NSThread sleepForTimeInterval:1];
-    NSLog(@"开始请求-----%ld",row);
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_NOW);
-        dispatch_async(queue, ^{
-            NSURL* url = [NSURL URLWithString:_urlArray[row % 6]];
-            
-            NSData* data = [[NSData alloc] initWithContentsOfURL:url];
-            UIImage* image = [[UIImage alloc] initWithData:data];
-            if (data) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    imageView.image = image;
-                    dispatch_semaphore_signal(self.semaphore);
-                    NSLog(@"下载完成-----%ld",row);
-                });
-            }
-        });
+    //弱网下完成显示一张图片才开始新开一个下载队列
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+        NSLog(@"开始请求-----%ld",row);
+        NSURL* url = [NSURL URLWithString:_urlArray[row % 6]];
+        
+        NSData* data = [[NSData alloc] initWithContentsOfURL:url];
+        UIImage* image = [[UIImage alloc] initWithData:data];
+        if (data) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                imageView.image = image;
+                dispatch_semaphore_signal(self.semaphore);
+            });
+        }
+    });
 }
+/*
+ 弱网下输出日志:每个任务间隔10s左右
+ 2017-03-06 19:21:05.932 GCDTest[925:347591] 开始请求-----0
+ 2017-03-06 19:21:15.026 GCDTest[925:347590] 开始请求-----1
+ 2017-03-06 19:21:28.776 GCDTest[925:347438] 开始请求-----2
+ 2017-03-06 19:21:41.867 GCDTest[925:347642] 开始请求-----3
+ 
+ */
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -122,7 +132,8 @@
 - (dispatch_semaphore_t)semaphore
 {
     if (!_semaphore) {
-        self.semaphore = dispatch_semaphore_create(3);
+        NSInteger maxConcurrent = 1;
+        self.semaphore = dispatch_semaphore_create(maxConcurrent);
     }
     return _semaphore;
 }
