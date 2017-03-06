@@ -8,7 +8,9 @@
 
 #import "SQGroupViewController.h"
 
-@interface SQGroupViewController ()
+@interface SQGroupViewController (){
+    NSInteger ticketCount;
+}
 
 @end
 
@@ -17,7 +19,7 @@
 #pragma mark viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    ticketCount = 10;
     [self basicSetting];
     
     
@@ -25,6 +27,7 @@
     
     [self dispatch_group_async];
     [self dispatch_apply];
+    [self 卖票];
 }
 
 #pragma mark - 系统代理
@@ -43,7 +46,51 @@
     
     
 }
+- (void)卖票
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
+    
+    dispatch_after(popTime, queue, ^{
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_group_t group = dispatch_group_create();
+        dispatch_group_async(group, queue, ^{
+            [self gcdSaleTicketWithName:@"gcd-1"];
+        });
+        dispatch_group_async(group, queue, ^{
+            [self gcdSaleTicketWithName:@"gcd-2"];
+        });
+        dispatch_group_notify(group, queue, ^{
+            NSLog(@"卖完了");
+        });
+    });
+}
+- (void)gcdSaleTicketWithName:(NSString *)name
+{
+    while (YES) {
+        //同步锁要锁的范围,对被抢夺资源修改/读取的代码部分
+        @synchronized (self) {
+            if (ticketCount>0) {
+                ticketCount--;
+                NSString * log = [NSString stringWithFormat:@"剩余票数 %ld,线程名称 %@",ticketCount,name];
+                NSLog(@"%@",log);
+            }
+            else{
+                break;
+            }
+        }
+        
+        if ([name isEqualToString:@"gcd-1"]) {
+            [NSThread sleepForTimeInterval:1];
+        }
+        else{
+            [NSThread sleepForTimeInterval:0.2f];
+        }
+    }
 
+}
 - (void)dispatch_group_async {
     
     /**
@@ -90,10 +137,9 @@
         NSLog(@"grou3  ---%@",responseString);
     });
     
-    NSLog(@"1,2,3请求未完成");
     //dispatch_group_wait用于阻塞等待所有group完成,测试会卡界面
    // dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
-    NSLog(@"wait--1,2,3请求完成回调");
+//    NSLog(@"wait--1,2,3请求完成回调");
 
     // 回到主队列中,刷新UI
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
@@ -124,7 +170,6 @@
             });
             NSLog(@"apply--1,2,3请求完成回调");
         });
-        NSLog(@"不用等1,2,3完成回调");
     });
 }
 @end

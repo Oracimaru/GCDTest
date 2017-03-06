@@ -41,7 +41,6 @@
 }
 
 // dispatch_barrier_async是在前面的任务执行结束后它才执行，而且它后面的任务等它执行完成之后才会执行
-//完全按照dispatch_async1,2,barrier_async,3执行
 //dispatch_sync会卡界面
 - (void)dispatch_barrier_async {
     
